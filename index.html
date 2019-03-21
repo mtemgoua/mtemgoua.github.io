@@ -25,7 +25,7 @@ display:block;
 </style>
 </head>
 <body>
-<input type="text" id="search" name="search"  />
+<input type="text" id="search" onkeyup="myFunction()" name="search"  />
 <input type="submit" value="search" />
 <ul id="myUL">
 <li><a href="">gum</a>
@@ -66,6 +66,21 @@ display:block;
               <td>Italy</td>
             </tr>
           </table>
-          
+</ul>
+<script>
+function myFunction(){
+var input, filter, li, tr, th, td, ul, a, i;
+input = document.getElementById("myInput");
+filter = input.value.toUpperCase();
+ul = document.getElementById("myUL");
+li = ul.document.getElementByTagName("li")
+for(i=0; < li.length; i++)
+a = li[i].getElementByTagName("a")[0];
+if(a.innerHTML.toUpperCase().indexOf(filter)>-1){
+li[i].style.display= "";
+}else{
+li[i.style.display = "none";]
+      }
+  }
 </body>
 </html>
