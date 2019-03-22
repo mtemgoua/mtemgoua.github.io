@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<meta charset="UFT-8">
 <head>
   <title>Code Editor</title>
 <style>
@@ -25,11 +24,17 @@ display:block;
 </style>
 </head>
 <body>
-<input type="text" id="search" onkeyup="myFunction()" name="search"  />
-<input type="submit" value="search" />
-<ul id="myUL">
-<li><a href="">gum</a>
-    <table>
+
+<input type="text" id="search_input.id" name="search" onkeyup="clear_highlight()" />
+
+
+
+
+
+
+<input type="submit" value="search" onclick="search()"/>
+
+    <table id="content.table">
             <tr>
               <th>Company</th>
               <th>Contact</th>
@@ -66,21 +71,53 @@ display:block;
               <td>Italy</td>
             </tr>
           </table>
-</ul>
+   <h4 id="result.h4">result:</h4>
 <script>
-function myFunction(){
-var input, filter, li, tr, th, td, ul, a, i;
-input = document.getElementById("myInput");
-filter = input.value.toUpperCase();
-ul = document.getElementById("myUL");
-li = ul.document.getElementByTagName("li")
-for(i=0; < li.length; i++)
-a = li[i].getElementByTagName("a")[0];
-if(a.innerHTML.toUpperCase().indexOf(filter)>-1){
-li[i].style.display= "";
-}else{
-li[i.style.display = "none";]
-      }
+  function clear_highlight(){
+    var table = document.getElementById("content.table");
+    var tr = table.getElementsByTagName("tr");
+
+    for(var i= 1; i<tr.length; i++){
+       var row = tr[i];
+       var row_innerText = row.innerText.toUpperCase();
+        row.style.backgroundColor = "white";    
+    }
   }
+
+  function search(){
+    var element = document.getElementById("search_input.id");
+    var user_input = element.value.toUpperCase();
+    var table = document.getElementById("content.table");
+    var tr = table.getElementsByTagName("tr");
+    var result_count = 0;
+    for(var i= 1; i<tr.length; i++){
+       var row = tr[i];
+       var row_innerText = row.innerText.toUpperCase();
+       // compare input text with rowintext 
+       if(row_innerText.indexOf(user_input) >= 0){
+          result_count++;
+          row.style.backgroundColor = "yellow";
+       }     
+    }
+    var h4 = document.getElementById("result.h4");
+    h4.innerText = "result:"+ result_count;
+
+  
+    element.value = "";
+
+
+    // ul = document.getElementById("myUL");
+    // li = ul.document.getElementByTagName("li")
+
+    // for(i=0; i < li.length; i++){
+    //   a = li[i].getElementByTagName("a")[0];
+    //   if(a.innerHTML.toUpperCase().indexOf(filter)>-1){
+    //     li[i].style.display= "";
+    //   }else{
+    //     li[i.style.display = "none"];
+    //   }
+    // }
+  }
+  </script>
 </body>
 </html>
